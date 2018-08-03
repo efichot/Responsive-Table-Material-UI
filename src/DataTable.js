@@ -221,7 +221,9 @@ class EnhancedTable extends React.Component {
       order = 'asc';
     }
 
-    this.setState({ order, orderBy });
+    const data = this.state.data.sort(getSorting(order, orderBy));
+
+    this.setState({ order, orderBy, data });
   };
 
   handleChange = (key, id) => event => {
@@ -313,7 +315,6 @@ class EnhancedTable extends React.Component {
             />
             <TableBody>
               {data
-                //.sort(getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(n => {
                   const isSelected = this.isSelected(n.id);
